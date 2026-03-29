@@ -1,14 +1,9 @@
 // console.log("Hello World");
 // console.log("This is a simple Node.js application.");
 let express = require('express');
+const { checkToken } = require('./checkTokenMiddleware');
 let app = express();
 app.use(express.json())
-
-// Middlewares
-let checkToken = (req,res,next)=>{
-    console.log("Checking Token...");
-    next()
-}
 
 
 app.get("/",(req,res)=>{
