@@ -4,10 +4,17 @@ let express = require('express');
 let app = express();
 app.use(express.json())
 
+// Middlewares
+let checkToken = (req,res,next)=>{
+    console.log("Checking Token...");
+    next()
+}
+
+
 app.get("/",(req,res)=>{
     res.send({status : 1 , msg : "Home Page"})
 })
-app.get("/news",(req,res)=>{
+app.get("/news",checkToken,(req,res)=>{
     res.send({status : 2 , msg : "News Page"})
 })
 
