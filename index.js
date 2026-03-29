@@ -13,7 +13,11 @@ app.get("/news",(req,res)=>{
 
 app.post("/login",(req,res)=>{
     console.log(req.body);
-    res.send({status : 3 , msg : "Login Page",data : req.body})
+    res.send({status : 3 , msg : "Login Page", data : req.body})
+})
+app.post("/query",(req,res)=>{
+    console.log(req.query);
+    res.send({status : 3 , msg : "Query Page", data : req.query})
 })
 
 app.listen("8000")
