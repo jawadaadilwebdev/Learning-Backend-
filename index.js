@@ -1,9 +1,12 @@
 // console.log("Hello World");
 // console.log("This is a simple Node.js application.");
 let express = require('express');
-const { checkToken } = require('./checkTokenMiddleware');
+const dotenv = require('dotenv');
+dotenv.config();
 let app = express();
 app.use(express.json())
+const { checkToken } = require('./checkTokenMiddleware');
+
 
 
 app.get("/",(req,res)=>{
@@ -22,4 +25,4 @@ app.post("/query",(req,res)=>{
     res.send({status : 3 , msg : "Query Page", data : req.query})
 })
 
-app.listen("8000")
+app.listen(process.env.PORT ||3000)
