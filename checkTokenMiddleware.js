@@ -11,7 +11,6 @@ let checkToken = (req,res,next)=>{
             msg : "Plz fill the correct token"
         })
     }
-    console.log("Done with Middleware");
     next()
 }
 
