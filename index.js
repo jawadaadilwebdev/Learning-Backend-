@@ -28,10 +28,21 @@ app.post("/query", (req, res) => {
   res.send({ status: 3, msg: "Query Page", data: req.query });
 });
 
-app.get("/student-read", (req, res) => {
-  res.send("Students Read Succesfully");
+
+// Getting Data of all the Students
+app.get("/student-read", async (req, res) => {
+  const allStudents = await Student.find();
+  res.send(allStudents);
 });
 
+// Delete Student by ID
+app.delete("/student-delete/:id", async (req,res)=>{
+  let deletedUser = await Student.findByIdAndDelete(req.params.id)
+  res.send(deletedUser)
+})
+
+
+// Creating New Student
 app.post("/student-create", async (req, res) => {
   try {
     const { name, email, age } = req.body;
