@@ -7,9 +7,10 @@ dotenv.config();
 let app = express();
 app.use(express.json());
 
-connectDB();
+let myDB = connectDB();
 
 const { checkToken } = require("./checkTokenMiddleware");
+const { Student } = require("./student.model");
 
 app.get("/", (req, res) => {
   res.send({ status: 1, msg: "Home Page" });
@@ -31,8 +32,20 @@ app.get("/student-read", (req, res) => {
   res.send("Students Read Succesfully");
 });
 
-app.post("/student-create", (req, res) => {
-  res.send("Students Created Succesfully");
+app.post("/student-create", async (req, res) => {
+  try {
+    const { name, email, age } = req.body;
+    const newStudent = new Student({
+      name,
+      email,
+      age,
+    });
+    const savedStudent = await newStudent.save();
+    console.log("Saved Student:", savedStudent);
+  } catch (error) {
+    console.error("Error creating student:", error);
+  }
+  res.send("Student Created Successfully");
 });
 
 app.listen(process.env.PORT || 3000);
