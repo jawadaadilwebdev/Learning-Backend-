@@ -38,9 +38,14 @@ app.get("/student-read", async (req, res) => {
 // Delete Student by ID
 app.delete("/student-delete/:id", async (req,res)=>{
   let deletedUser = await Student.findByIdAndDelete(req.params.id)
-  res.send(deletedUser)
+  res.send("Student Deleted",deletedUser)
 })
 
+// Update Existing Student by ID
+app.put("/student-update/:id",async(req,res)=>{
+  const updatedStudent = await Student.findByIdAndUpdate(req.params.id,{ $set: req.body })
+  res.send("Student Data Updated",updatedStudent)
+})
 
 // Creating New Student
 app.post("/student-create", async (req, res) => {
@@ -56,7 +61,7 @@ app.post("/student-create", async (req, res) => {
   } catch (error) {
     console.error("Error creating student:", error);
   }
-  res.send("Student Created Successfully");
+  res.send("Student Created Successfully", newStudent);
 });
 
 app.listen(process.env.PORT || 3000);
