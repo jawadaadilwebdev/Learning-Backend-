@@ -29,7 +29,6 @@ app.post("/query", (req, res) => {
   res.send({ status: 3, msg: "Query Page", data: req.query });
 });
 
-
 // Getting Data of all the Students
 app.get("/student-read", async (req, res) => {
   const allStudents = await Student.find();
@@ -37,16 +36,18 @@ app.get("/student-read", async (req, res) => {
 });
 
 // Delete Student by ID
-app.delete("/student-delete/:id", async (req,res)=>{
-  let deletedUser = await Student.findByIdAndDelete(req.params.id)
-  res.send("Student Deleted")
-})
+app.delete("/student-delete/:id", async (req, res) => {
+  let deletedUser = await Student.findByIdAndDelete(req.params.id);
+  res.send("Student Deleted");
+});
 
 // Update Existing Student by ID
-app.put("/student-update/:id",async(req,res)=>{
-  const updatedStudent = await Student.findByIdAndUpdate(req.params.id,{ $set: req.body })
-  res.send("Student Data Updated")
-})
+app.put("/student-update/:id", async (req, res) => {
+  const updatedStudent = await Student.findByIdAndUpdate(req.params.id, {
+    $set: req.body,
+  });
+  res.send("Student Data Updated");
+});
 
 // Creating New Student
 app.post("/student-create", async (req, res) => {
